@@ -41,24 +41,22 @@
   <script>
 
 
-  function getData(selected_major) {      
+ function getData(selected_major) {      // called when a button is clicked. paramter selected_meal = breakfast, lunch, or dinner
       var request = new XMLHttpRequest();
       request.open('GET', 'cit5students.json');      // open Ajax request for data file menu_items.json
  
       request.onload = function() {                     // when the data comes back, browser calls this function
          var data = JSON.parse(request.responseText);    // convert json to javascript array of objects
 
-         selected_major = []    // new array to hold filtered data
-	 for(i=0, i < data.length; i++) {
-   	    if(data[i].major == selected_major) {
-       		 selected_major.push(data[i].major);
-    }
-} 
+         major_name = data.filter(getMajor)       // meal_itmes array will contain the filtered data using the getMeal() function
+         function getMajor(major) {
+            return name.major == selected_major;   // the new meal_items array will contain only items for the selected meal
+         }
         
         if (request.status == 200) {    // if all is well as data returns, then compile and populate the template
             var templateText = document.getElementById('tableTemplate').innerHTML;
             var compiledTemplateText = Handlebars.compile(templateText);       
-            compiledHtml = compiledTemplateText({ rows: major_students })          
+            compiledHtml = compiledTemplateText({ rows: meal_items })          
             document.getElementById('studentTable').innerHTML = compiledHtml; 
         }
         else {

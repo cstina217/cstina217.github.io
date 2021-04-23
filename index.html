@@ -49,7 +49,7 @@
          var data = JSON.parse(request.responseText);    // convert json to javascript array of objects
 
          major_students = data.filter(getMajor)       // meal_itmes array will contain the filtered data using the getMeal() function
-         function getMajor(item) {
+         function getMajor(major) {
             return item.major == selected_major;   // the new meal_items array will contain only items for the selected meal
          }
         
